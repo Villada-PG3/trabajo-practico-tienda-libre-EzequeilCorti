@@ -1,0 +1,8 @@
+venv/
+db.sqlite3
+
+# Ignorar todos los __pycache__
+__pycache__/
+
+# Ignorar archivos compilados de Python
+*.pyc
