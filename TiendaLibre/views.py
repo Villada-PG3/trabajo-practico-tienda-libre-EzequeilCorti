@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-class ProductosTemplateView(TemplateView):
-    template_name = 'productos.html'
+from django.views.generic import ListView
+from .models import Producto
 
+class ProductosTemplateView(ListView):
+    model = Producto
+    template_name = "productos.html"
+    context_object_name = "productos"
 # Create your views here.
