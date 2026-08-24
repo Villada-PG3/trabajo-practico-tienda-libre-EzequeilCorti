@@ -1,30 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        #bordes {
-            border: 2px solid rgb(0, 163, 204);
-            padding: 10px;
-            margin: 20px auto;
-            width: 50%;
-            border-radius: 25px;
-        }
-    </style>
-</head>
-<body>
-    <h1 >Ezequiel Corti</h1>
-    <div id = 'bordes'>
-        <p>Soy un estudiante del Intituto Tecnico Salesiano Villada, estoy cursando el 6 año de la especialidad de Programacion.</p>
+{% extends "base.html" %}
+
+{% block title %}Acerca de mí - TiendaLibre{% endblock %}
+
+{% block content %}
+
+<section id="sobre-mi">
+    <h2>Sobre mí</h2>
+
+    <div class="contenedor-flex">
+        <h4>
+            Soy Ezequiel, estudiante de programación apasionado por la
+            tecnología, el aprendizaje constante y el desarrollo personal.
+            Me interesan los autos, el gimnasio, el gaming y la fotografía.
+            Disfruto trabajar en equipo, improvisar soluciones y seguir
+            aprendiendo de forma autodidacta.
+        </h4>
     </div>
-</body>
-</html>
+</section>
+
+<section class="seccion-azul" id="intereses">
+    <h2>Mis intereses</h2>
+
+    <p>
+        Estas son algunas de las actividades y áreas que más disfruto:
+    </p>
+
+    <ul>
+        <li>Programación</li>
+        <li>Autos</li>
+        <li>Gimnasio</li>
+        <li>Gaming</li>
+        <li>Fotografía</li>
+    </ul>
+</section>
+
+<section id="habilidades">
+    <h2>Habilidades personales</h2>
+
+    <p>Algunas de mis principales fortalezas:</p>
+
+    <ul>
+        <li>Sociable</li>
+        <li>Trabajo en equipo</li>
+        <li>Improvisación</li>
+        <li>Autodidacta</li>
+    </ul>
+</section>
+
+<section class="seccion-azul">
+    <h2>Hobbies y nivel</h2>
+
+    <p>Mi nivel personal en distintas áreas:</p>
+
+    <table>
+        <tr>
+            <th>Hobby</th>
+            <th>Nivel</th>
+        </tr>
+
+        <tr>
+            <td>Programación</td>
+            <td>Alto</td>
+        </tr>
+
+        <tr>
+            <td>Gaming</td>
+            <td>Alto</td>
+        </tr>
+
+        <tr>
+            <td>Fotografía</td>
+            <td>Medio</td>
+        </tr>
+    </table>
+</section>
+
+<section id="redes">
+    <h2>Redes sociales</h2>
+
+    <p>
+        Podés visitar mi Instagram haciendo click aquí:
+    </p>
+
+    <a href="https://www.instagram.com/" target="_blank">
+        Ir a Instagram
+    </a>
+</section>
+
+{% endblock %}

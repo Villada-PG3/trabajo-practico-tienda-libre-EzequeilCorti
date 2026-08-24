@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.http import HttpResponse
 from django.views.generic import ListView
 from .models import Producto
 
@@ -11,7 +10,7 @@ class ProductosTemplateView(ListView):
 # Create your views here.
 
 def home(request):
-    return HttpResponse('<h1>Bienvenidos a Tienda Libre</h1>') 
+    return render(request, 'home.html')
 
 def home_1(request):
     return render(request, 'home.html')

@@ -1,38 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Productos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        
-    </style>
-    
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+Productos - TiendaLibre
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Nuestros productos</h1>
+
 {% for producto in productos %}
-    <div>
-        <h2>{{ producto.nombre }}</h2>
 
-        <p>{{ producto.descripcion }}</p>
+<div class="card mb-3">
+    <div class="card-body">
 
-        <p>${{ producto.precio }}</p>
+        <h5 class="card-title">
+            {{ producto }}
+        </h5>
 
-        {% if producto.imagen %}
-            <img src="{{ producto.imagen.url }}" width="300">
-        {% else %}
-            <p>Sin imagen</p>
-        {% endif %}
-
-        <hr>
     </div>
+</div>
+
+{% empty %}
+
+<div class="alert alert-info">
+    No hay productos disponibles.
+</div>
+
 {% endfor %}
 
-</body>
-</html>
+{% endblock %}
