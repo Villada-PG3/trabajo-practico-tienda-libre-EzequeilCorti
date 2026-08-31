@@ -5,14 +5,36 @@
 {% block content %}
 <div class="p-5 mb-4 bg-white rounded-3 shadow-sm border">
     <div class="container-fluid py-3">
-        <h1 class="display-5 fw-bold text-primary">
-            ¡Bienvenido a TiendaLibre!
-        </h1>
-
-        <p class="col-md-8 fs-4">
-            Tu plataforma de comercio electrónico favorita.
-            Explora nuestros productos disponibles.
-        </p>
+        <h1 class="display-5 fw-bold text-primary">¡Bienvenido a TiendaLibre! </h1>
+        <p class="col-md-8 fs-4">Tu plataforma de comercio electrónico favorita. Explora nuestros productos disponibles.</p>
     </div>
 </div>
-{% endblock %}
+
+{% if usuario_logueado %}
+    <div class="alert alert-success" role="alert">
+        ¡Bienvenido de nuevo!
+    </div>
+
+    <section>
+        <h2 class="h3 mb-3">{{ titulo }}</h2>
+        <div class="row g-3">
+            {% for producto in productos %}
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">{{ producto.nombre }}</h3>
+                            <p class="card-text fw-bold">${{ producto.precio|default:"Consultar precio"  }}</p>
+                        </div>
+                    </article>
+                </div>
+            {% empty %}
+                <p>No hay productos destacados disponibles.</p>
+            {% endfor %}
+        </div>
+    </section>
+{% else %}
+    <div class="alert alert-warning" role="alert">
+        Debes iniciar sesión para ver los productos destacados.
+    </div>
+{% endif %}
+{% endblock %} 

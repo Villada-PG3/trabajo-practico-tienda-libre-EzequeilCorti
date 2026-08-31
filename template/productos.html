@@ -11,12 +11,20 @@ Productos - TiendaLibre
 {% for producto in productos %}
 
 <div class="card mb-3">
-    <div class="card-body">
+    <div>
+        <h2>{{ producto.nombre }}</h2>
 
-        <h5 class="card-title">
-            {{ producto }}
-        </h5>
+        <p>{{ producto.descripcion }}</p>
 
+        <p>${{ producto.precio }}</p>
+
+        {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" width="300">
+        {% else %}
+            <p>Sin imagen</p>
+        {% endif %}
+
+        <hr>
     </div>
 </div>
 
