@@ -10,20 +10,14 @@ class ProductosTemplateView(ListView):
 
 
 def home(request):
-    productos_destacados = [
-         {"nombre": "Auriculares Bluetooth", "precio": 15999, "stock": 32},
-            {"nombre": "Mouse inalámbrico", "precio": 8499, "stock": 18},
-            {"nombre": "Teclado mecánico", "precio": 24999, "stock": 7},
-            {"nombre": "Webcam HD", "precio": 12999, "stock": 4},
-            {"nombre": "Pendrive 64GB", "precio": 5999, "stock": 1},
-            {"nombre": "Hub USB-C", "precio": None, "stock": 0},
-    ]
-
+    productos = Producto.objects.filter(activo=True).order_by('-fecha_creacion')[:3]
     context = {
-        'titulo': 'Productos de la semana',
-        'productos': productos_destacados,
+        'productos': productos,
+        'titulo': 'Ultimos productos agregados',
         'usuario_logueado': True
     }
+
+    
 
     return render(request, 'home.html', context)
 
@@ -34,3 +28,10 @@ def home_1(request):
 
 def acerca_de_mi(request):
     return render(request, 'acerca-de-mi.html')
+
+def catalogo(request):
+    productos = Producto.objects.all()
+    context = {
+        'productos': productos
+    }
+    return render(request, 'productos.html', context)
