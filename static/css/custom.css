@@ -1,0 +1,294 @@
+/* =========================================================
+   TiendaLibre — hoja de estilos propia
+   Se carga DESPUÉS de Bootstrap, así que estas reglas
+   pisan (sobrescriben) los estilos por defecto de Bootstrap.
+   ========================================================= */
+
+:root {
+  --ink: #14171f;
+  --ink-soft: #2a2e3a;
+  --paper: #f7f7f5;
+  --paper-raised: #ffffff;
+  --accent: #f2a93b;
+  --accent-dark: #c97f1e;
+  --line: #e4e2dd;
+  --text-muted: #6b6f7a;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Navbar ---------- */
+.navbar.bg-dark {
+  background-color: var(--ink) !important;
+  border-bottom: 3px solid var(--accent);
+}
+
+.navbar-brand {
+  font-size: 1.35rem;
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+  width: 100%;
+}
+
+/* ---------- Botones ---------- */
+.btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: var(--ink);
+}
+
+.btn-outline-ink {
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.5rem 1.4rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline-ink:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- Hero (home) ---------- */
+.hero {
+  background-color: var(--ink);
+  color: var(--paper);
+  border-radius: 0;
+  padding: 3.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  max-width: 20ch;
+}
+
+.hero p {
+  color: #d7d7d2;
+  max-width: 55ch;
+}
+
+/* ---------- Tarjetas de producto (ticket de precio) ---------- */
+.card-producto {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.card-producto:hover {
+  border-color: var(--accent);
+}
+
+.card-producto__nombre {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.card-producto__precio-fila {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.card-producto__linea {
+  flex: 1;
+  border-top: 2px dashed var(--line);
+}
+
+.card-producto__precio {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
+  background: var(--accent);
+  padding: 0.15rem 0.6rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.card-producto__imagen {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--line);
+    display: block;
+}
+
+.card-producto__sin-imagen {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---------- Alertas ---------- */
+.alert-warning {
+  background-color: #fff3e0;
+  border: 1px solid var(--accent);
+  color: var(--ink);
+}
+
+.alert-success {
+  background-color: #eef7ee;
+  border: 1px solid #7fb281;
+  color: var(--ink);
+}
+
+.alert-info {
+  background-color: var(--paper-raised);
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+}
+
+/* ---------- Página "Acerca de mí" ---------- */
+.seccion-panel {
+  padding: 2.5rem 0;
+}
+
+.seccion-panel--tinta {
+  background-color: var(--ink);
+  color: var(--paper);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  margin: 2rem 0;
+}
+
+.seccion-panel--tinta h2 {
+  color: var(--paper);
+}
+
+.chip-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.chip {
+  border: 1px solid var(--accent);
+  color: var(--paper);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.skill-lista {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-lista li {
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.nivel-fila {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.nivel-fila__etiqueta {
+  width: 140px;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.nivel-barra {
+  flex: 1;
+  height: 10px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.nivel-barra__relleno {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+/* ---------- Footer ---------- */
+footer.bg-dark {
+  background-color: var(--ink) !important;
+}
+
+footer p {
+  color: #b8b8b3;
+  font-size: 0.9rem;
+}

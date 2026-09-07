@@ -4,42 +4,38 @@
 
 {% block content %}
 
-<section id="sobre-mi">
+<section id="sobre-mi" class="seccion-panel">
     <h2>Sobre mí</h2>
 
     <div class="contenedor-flex">
-        <h4>
+        <p class="fs-5" style="max-width: 65ch;">
             Soy Ezequiel, estudiante de programación apasionado por la
             tecnología, el aprendizaje constante y el desarrollo personal.
             Me interesan los autos, el gimnasio, el gaming y la fotografía.
             Disfruto trabajar en equipo, improvisar soluciones y seguir
             aprendiendo de forma autodidacta.
-        </h4>
+        </p>
     </div>
 </section>
 
-<section class="seccion-azul" id="intereses">
+<section class="seccion-panel--tinta" id="intereses">
     <h2>Mis intereses</h2>
+    <p>Estas son algunas de las actividades y áreas que más disfruto:</p>
 
-    <p>
-        Estas son algunas de las actividades y áreas que más disfruto:
-    </p>
-
-    <ul>
-        <li>Programación</li>
-        <li>Autos</li>
-        <li>Gimnasio</li>
-        <li>Gaming</li>
-        <li>Fotografía</li>
+    <ul class="chip-lista">
+        <li class="chip">Programación</li>
+        <li class="chip">Autos</li>
+        <li class="chip">Gimnasio</li>
+        <li class="chip">Gaming</li>
+        <li class="chip">Fotografía</li>
     </ul>
 </section>
 
-<section id="habilidades">
+<section id="habilidades" class="seccion-panel">
     <h2>Habilidades personales</h2>
-
     <p>Algunas de mis principales fortalezas:</p>
 
-    <ul>
+    <ul class="skill-lista">
         <li>Sociable</li>
         <li>Trabajo en equipo</li>
         <li>Improvisación</li>
@@ -47,42 +43,31 @@
     </ul>
 </section>
 
-<section class="seccion-azul">
+<section class="seccion-panel--tinta">
     <h2>Hobbies y nivel</h2>
-
     <p>Mi nivel personal en distintas áreas:</p>
 
-    <table>
-        <tr>
-            <th>Hobby</th>
-            <th>Nivel</th>
-        </tr>
-
-        <tr>
-            <td>Programación</td>
-            <td>Alto</td>
-        </tr>
-
-        <tr>
-            <td>Gaming</td>
-            <td>Alto</td>
-        </tr>
-
-        <tr>
-            <td>Fotografía</td>
-            <td>Medio</td>
-        </tr>
-    </table>
+    <div class="mt-4">
+        <div class="nivel-fila">
+            <span class="nivel-fila__etiqueta">Programación</span>
+            <div class="nivel-barra"><div class="nivel-barra__relleno" style="width: 90%;"></div></div>
+        </div>
+        <div class="nivel-fila">
+            <span class="nivel-fila__etiqueta">Gaming</span>
+            <div class="nivel-barra"><div class="nivel-barra__relleno" style="width: 90%;"></div></div>
+        </div>
+        <div class="nivel-fila">
+            <span class="nivel-fila__etiqueta">Fotografía</span>
+            <div class="nivel-barra"><div class="nivel-barra__relleno" style="width: 60%;"></div></div>
+        </div>
+    </div>
 </section>
 
-<section id="redes">
+<section id="redes" class="seccion-panel">
     <h2>Redes sociales</h2>
+    <p>Podés visitar mi Instagram haciendo click aquí:</p>
 
-    <p>
-        Podés visitar mi Instagram haciendo click aquí:
-    </p>
-
-    <a href="https://www.instagram.com/" target="_blank">
+    <a href="https://www.instagram.com/" target="_blank" class="btn btn-outline-ink">
         Ir a Instagram
     </a>
 </section>

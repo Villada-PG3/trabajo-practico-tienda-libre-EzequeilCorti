@@ -1,0 +1,12 @@
+Producto.objects.all()
+Producto.objects.filter(activo=True)
+Producto.objects.filter(precio__gt=10000)
+Producto.objects.filter(nombre__icontains="mouse")
+Producto.objects.exclude(stock=0)
+Producto.objects.order_by("-precio")
+Producto.objects.get(id=1)
+Producto.objects.filter(categoria_id__in=[1, 2])
+producto = Producto.objects.get(id=1)
+producto.categoria
+categoria = Categoria.objects.get(id=1)
+categoria.productos.all()
