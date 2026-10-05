@@ -6,3 +6,5 @@ __pycache__/
 
 # Ignorar archivos compilados de Python
 *.pyc
+media/
+staticfiles/
