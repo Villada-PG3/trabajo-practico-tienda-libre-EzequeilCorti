@@ -1,49 +1,36 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import TemplateView, ListView
 from .models import Producto
 
 
-class ProductosTemplateView(ListView):
+# 1 y 5. Vista Home reescrita como TemplateView
+class HomeView(TemplateView):
+    template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Obtenemos los últimos 3 productos activos
+        context['productos'] = Producto.objects.filter(activo=True).order_by('-fecha_creacion')[:3]
+        context['titulo'] = 'Últimos productos agregados'
+        context['usuario_logueado'] = True
+        return context
+
+
+# 3. Vista Catalogo reescrita como ListView
+class CatalogoView(ListView):
     model = Producto
     template_name = "productos.html"
     context_object_name = "productos"
 
 
-def home(request):
-    productos = Producto.objects.filter(activo=True).order_by('-fecha_creacion')[:3]
-
-    context = {
-        'productos': productos,
-        'titulo': 'Ultimos productos agregados',
-        'usuario_logueado': True
-    }
-
-    return render(request, 'home.html', context)
-
-
-def home_1(request):
-    return home(request)
-
-
+# Vistas existentes que se mantienen
 def acerca_de_mi(request):
     return render(request, 'acerca-de-mi.html')
 
 
-def catalogo(request):
-    productos = Producto.objects.all()
-
-    context = {
-        'productos': productos
-    }
-
-    return render(request, 'productos.html', context)
-
-
 def detalle_producto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
-
     context = {
         'producto': producto
     }
-
     return render(request, 'detalle_producto.html', context)
