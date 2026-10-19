@@ -3,7 +3,6 @@ from django.views.generic import TemplateView, ListView
 from .models import Producto
 
 
-# 1 y 5. Vista Home reescrita como TemplateView
 class HomeView(TemplateView):
     template_name = "home.html"
 
@@ -16,14 +15,11 @@ class HomeView(TemplateView):
         return context
 
 
-# 3. Vista Catalogo reescrita como ListView
 class CatalogoView(ListView):
     model = Producto
     template_name = "productos.html"
     context_object_name = "productos"
 
-
-# Vistas existentes que se mantienen
 def acerca_de_mi(request):
     return render(request, 'acerca-de-mi.html')
 
