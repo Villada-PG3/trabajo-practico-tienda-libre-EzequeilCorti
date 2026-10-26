@@ -1,75 +1,84 @@
 {% extends "base.html" %}
 
-{% block title %}Productos - TiendaLibre{% endblock %}
+{% block title %}
+    {% if categoria_actual %}{{ categoria_actual.nombre }} - TiendaLibre{% else %}Productos - TiendaLibre{% endif %}
+{% endblock %}
 
 {% block content %}
 
-<h1 class="mb-4">Nuestros productos</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>
+        {% if categoria_actual %}
+            Categoría: {{ categoria_actual.nombre }}
+        {% else %}
+            Nuestros productos
+        {% endif %}
+    </h1>
+</div>
+
+<!-- Formulario de Búsqueda -->
+<form method="GET" action="{% url 'TiendaLibre:catalogo' %}" class="mb-4">
+    <div class="input-group">
+        <input 
+            type="text" 
+            name="q" 
+            class="form-control" 
+            placeholder="Buscar productos por nombre..." 
+            value="{{ request.GET.q|default:'' }}"
+        >
+        <button class="btn btn-primary" type="submit">Buscar</button>
+        {% if request.GET.q %}
+            <a href="{% url 'TiendaLibre:catalogo' %}" class="btn btn-outline-secondary">Limpiar</a>
+        {% endif %}
+    </div>
+</form>
 
 <div class="row g-4">
     {% for producto in productos %}
 
     <div class="col-md-6 col-lg-4">
-
-        <a href="{% url 'TiendaLibre:detalle_producto' producto.pk %}"
-           class="text-decoration-none text-dark">
-
+        <a href="{% url 'TiendaLibre:detalle_producto' producto.pk %}" class="text-decoration-none text-dark">
             <article class="card-producto h-100"> 
-
                 {% if producto.imagen %}
-                    <img
-                        src="{{ producto.imagen.url }}"
-                        alt="{{ producto.nombre }}"
-                        class="card-producto__imagen"
-                    >
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="card-producto__imagen">
                 {% else %}
-                    <div class="card-producto__sin-imagen">
-                        Sin imagen
-                    </div>
+                    <div class="card-producto__sin-imagen">Sin imagen</div>
                 {% endif %}
 
                 <div class="p-3">
-                    <h2 class="card-producto__nombre">
-                        {{ producto.nombre }}
-                    </h2>
-
+                    <h2 class="card-producto__nombre">{{ producto.nombre }}</h2>
                     <div class="card-producto__precio-fila">
                         <span class="card-producto__linea"></span>
-                        <span class="card-producto__precio">
-                            ${{ producto.precio }}
-                        </span>
+                        <span class="card-producto__precio">${{ producto.precio }}</span>
                     </div>
                 </div>
-
             </article>
-
         </a>
-
     </div>
 
     {% empty %}
 
     <div class="col-12">
         <div class="alert alert-info">
-            No hay productos disponibles.
+            No se encontraron productos disponibles.
         </div>
     </div>
 
     {% endfor %}
 </div>
+
+<!-- Paginación -->
 {% if is_paginated %}
 <nav aria-label="Navegación de páginas" class="mt-4">
     <ul class="pagination justify-content-center">
-    
         {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a>
             </li>
         {% else %}
             <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
         {% endif %}
 
-    
         {% for i in paginator.page_range %}
             {% if page_obj.number == i %}
                 <li class="page-item active" aria-current="page">
@@ -77,15 +86,14 @@
                 </li>
             {% else %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    <a class="page-link" href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
                 </li>
             {% endif %}
         {% endfor %}
 
-    
         {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
             </li>
         {% else %}
             <li class="page-item disabled"><span class="page-link">&raquo;</span></li>

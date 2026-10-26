@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import Producto
+from .models import Producto, Categoria
 
 
 class HomeView(TemplateView):
@@ -19,6 +19,32 @@ class CatalogoView(ListView):
     template_name = "productos.html"
     context_object_name = "productos"
     paginate_by = 6
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(activo=True)
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(nombre__icontains=query)
+        return queryset
+
+
+class CategoriaView(ListView):
+    model = Producto
+    template_name = "productos.html"
+    context_object_name = "productos"
+    paginate_by = 6
+
+    def get_queryset(self):
+        return Producto.objects.filter(
+            activo=True,
+            categoria__slug=self.kwargs['slug']
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categoria_slug = self.kwargs['slug']
+        context['categoria_actual'] = Categoria.objects.filter(slug=categoria_slug).first()
+        return context
 
 
 class DetalleProductoView(DetailView):
