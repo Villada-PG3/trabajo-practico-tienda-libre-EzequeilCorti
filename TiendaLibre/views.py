@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Producto, Categoria
+from .forms import ContactoForm
+from django.contrib import messages
 
 
 class HomeView(TemplateView):
@@ -55,3 +57,22 @@ class DetalleProductoView(DetailView):
 
 def acerca_de_mi(request):
     return render(request, 'acerca-de-mi.html')
+
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            # Procesamos los datos limpios (cleaned_data)
+            nombre = form.cleaned_data['nombre']
+            email = form.cleaned_data['email']
+            asunto = form.cleaned_data['asunto']
+            mensaje = form.cleaned_data['mensaje']
+
+            # Simulamos el envío del mensaje con un aviso de éxito
+            messages.success(request, f'¡Gracias {nombre}! Tu mensaje ha sido enviado con éxito.')
+            return redirect('TiendaLibre:contacto')
+    else:
+        # Petición GET: mostramos el formulario vacío
+        form = ContactoForm()
+
+    return render(request, 'contacto.html', {'form': form})

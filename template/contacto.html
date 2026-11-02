@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto - TiendaLibre{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <h1 class="mb-4">Contacto</h1>
+
+        <!-- Mensajes de éxito o aviso -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="card p-4 shadow-sm">
+            <form method="POST" novalidate>
+                {% csrf_token %}  <!-- Protección obligatoria contra CSRF -->
+
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label font-weight-bold">
+                            {{ field.label }}
+                        </label>
+                        
+                        {{ field }}
+
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in field.errors %}
+                                    <p class="mb-0">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary w-100 mt-2">Enviar mensaje</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
