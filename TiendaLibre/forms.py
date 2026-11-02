@@ -1,4 +1,5 @@
 from django import forms
+from .models import Producto
 
 
 class ContactoForm(forms.Form):
@@ -42,3 +43,18 @@ class ContactoForm(forms.Form):
             'placeholder': '11-1234-5678'
         })
     )
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'descripcion', 'precio', 'marca', 'stock', 'categoria', 'imagen', 'activo']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del producto'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Descripción detallada'}),
+            'precio': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0.00'}),
+            'marca': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Marca'}),
+            'stock': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Cantidad en stock'}),
+            'categoria': forms.Select(attrs={'class': 'form-select'}),
+            'imagen': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'activo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Producto, Categoria
-from .forms import ContactoForm
+from .forms import ContactoForm, ProductoForm
 from django.contrib import messages
 
 
@@ -62,17 +62,27 @@ def contacto(request):
     if request.method == 'POST':
         form = ContactoForm(request.POST)
         if form.is_valid():
-            # Procesamos los datos limpios (cleaned_data)
+            
             nombre = form.cleaned_data['nombre']
             email = form.cleaned_data['email']
             asunto = form.cleaned_data['asunto']
             mensaje = form.cleaned_data['mensaje']
 
-            # Simulamos el envío del mensaje con un aviso de éxito
             messages.success(request, f'¡Gracias {nombre}! Tu mensaje ha sido enviado con éxito.')
             return redirect('TiendaLibre:contacto')
     else:
-        # Petición GET: mostramos el formulario vacío
         form = ContactoForm()
 
     return render(request, 'contacto.html', {'form': form})
+
+def producto_nuevo(request):
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES)
+        if form.is_valid():
+            producto = form.save()
+            messages.success(request, f'¡El producto "{producto.nombre}" fue creado con éxito!')
+            return redirect('TiendaLibre:catalogo')
+    else:
+        form = ProductoForm()
+
+    return render(request, 'producto_form.html', {'form': form})
